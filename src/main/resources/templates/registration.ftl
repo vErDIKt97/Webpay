@@ -4,6 +4,7 @@
     Add new User
     ${message!}
     <@l.login "/registration">
-        <div><label> User FIO : <input type="text" name="fio"/> </label></div>
+        <div><label> Name : <input type="text" name="name"/> </label></div>
+        <div><label> SoName : <input type="text" name="soname"/> </label></div>
     </@l.login>
 </@c.page>

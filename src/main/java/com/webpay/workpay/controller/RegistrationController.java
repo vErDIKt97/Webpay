@@ -3,7 +3,6 @@ package com.webpay.workpay.controller;
 import com.webpay.workpay.domain.Role;
 import com.webpay.workpay.domain.User;
 import com.webpay.workpay.repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,11 @@ import java.util.Map;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 public class RegistrationController {
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
+
+    public RegistrationController(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @GetMapping("/registration")
     public String registration() {
@@ -25,7 +27,9 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser (@RequestParam("fio") String fio, User user, Map<String ,Object> model) {
+    public String addUser (@RequestParam("name") String name,
+                           @RequestParam("soname") String soname,
+                           User user, Map<String ,Object> model) {
         User userFromDB = userRepo.findByUsername(user.getUsername());
 
         if (userFromDB != null){
@@ -34,8 +38,11 @@ public class RegistrationController {
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
-        user.setFio(fio);
+        user.setName(name);
+        user.setSoname(soname);
+        user.findSells();
         userRepo.save(user);
         return "redirect:/user";
     }
+
 }

@@ -1,13 +1,12 @@
 package com.webpay.workpay.domain;
 
+import com.webpay.workpay.service.ExcelParser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
+import java.io.File;
+import java.util.*;
 
 @Entity
 @Table(name = "usr")
@@ -18,20 +17,32 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean active;
-    private String fio;
-    private Integer sells;
+    private String soname = null;
+    private String name = null;
+    private Integer sells = null;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public String getFio() {
-        return fio;
+    private static HashMap<String, Integer> list = new HashMap<>();
+
+    public static void setFile(File file) {
+        User.list = ExcelParser.excelParse(file);
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public static HashMap<String, Integer> getList() {
+        return list;
+    }
+
+
+    public String getSoname() {
+        return soname;
+    }
+
+    public void setSoname(String soname) {
+        this.soname = soname;
     }
 
     public Integer getSells() {
@@ -80,7 +91,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles()   ;
+        return getRoles();
     }
 
     public String getPassword() {
@@ -107,4 +118,22 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void findSells() {
+        if (!User.getList().isEmpty()) {
+            for (Map.Entry<String, Integer> pair : User.getList().entrySet()) {
+                if (pair.getKey().contains(this.getName()) && pair.getKey().contains(this.getSoname())) {
+                    this.setSells(pair.getValue());
+                    break;
+                }
+            }
+        }
+    }
 }
