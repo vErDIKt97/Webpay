@@ -10,7 +10,8 @@
             <tr>
                 <th>Username</th>
                 <th>Name</th>
-                <th>Soname</th>
+                <th>Surname</th>
+                <th>Password</th>
                 <th>Role</th>
             </tr>
             </thead>
@@ -23,7 +24,10 @@
                         <input type="text" name="name" value="${user.name!}">
                     </label></td>
                 <td><label>
-                        <input type="text" name="soname" value="${user.soname!}">
+                        <input type="text" name="surname" value="${user.surname!}">
+                    </label></td>
+                <td><label>
+                        <input type="text" name="password" value="${user.password}"
                     </label></td>
                 <td>
                     <#list roles as role>

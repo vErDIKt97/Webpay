@@ -17,7 +17,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean active;
-    private String soname = null;
+    private String Surname = null;
     private String name = null;
     private Integer sells = null;
 
@@ -37,12 +37,12 @@ public class User implements UserDetails {
     }
 
 
-    public String getSoname() {
-        return soname;
+    public String getSurname() {
+        return Surname;
     }
 
-    public void setSoname(String soname) {
-        this.soname = soname;
+    public void setSurname(String surname) {
+        this.Surname = surname;
     }
 
     public Integer getSells() {
@@ -129,7 +129,7 @@ public class User implements UserDetails {
     public void findSells() {
         if (!User.getList().isEmpty()) {
             for (Map.Entry<String, Integer> pair : User.getList().entrySet()) {
-                if (pair.getKey().contains(this.getName()) && pair.getKey().contains(this.getSoname())) {
+                if (pair.getKey().contains(this.getName()) && pair.getKey().contains(this.getSurname())) {
                     this.setSells(pair.getValue());
                     break;
                 }

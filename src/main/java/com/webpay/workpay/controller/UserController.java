@@ -26,6 +26,10 @@ public class UserController {
     @GetMapping
     public String userList(Model model) {
         model.addAttribute("users", userRepo.findAll());
+        for (User user :
+                userRepo.findAll()) {
+            user.findSells();
+        }
         return "userList";
     }
 
@@ -35,18 +39,26 @@ public class UserController {
         model.addAttribute("roles", Role.values());
         return "userEdit";
     }
+    @GetMapping("del/{user}")
+    public String userDelete(@PathVariable User user, Model model) {
+        userRepo.delete(user);
+        model.addAttribute("users",userRepo.findAll());
+        return "userList";
+    }
 
     @PostMapping
     public String userSave(
             @RequestParam String username,
             @RequestParam String name,
-            @RequestParam String soname,
+            @RequestParam String surname,
+            @RequestParam String password,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         user.setUsername(username);
-        user.setSoname(soname);
+        user.setSurname(surname);
         user.setName(name);
+        user.setPassword(password);
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());

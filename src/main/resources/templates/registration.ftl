@@ -5,6 +5,6 @@
     ${message!}
     <@l.login "/registration">
         <div><label> Name : <input type="text" name="name"/> </label></div>
-        <div><label> SoName : <input type="text" name="soname"/> </label></div>
+        <div><label> SoName : <input type="text" name="surname"/> </label></div>
     </@l.login>
 </@c.page>

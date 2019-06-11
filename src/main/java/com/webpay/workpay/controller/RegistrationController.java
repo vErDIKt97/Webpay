@@ -28,7 +28,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser (@RequestParam("name") String name,
-                           @RequestParam("soname") String soname,
+                           @RequestParam("surname") String surname,
                            User user, Map<String ,Object> model) {
         User userFromDB = userRepo.findByUsername(user.getUsername());
 
@@ -39,7 +39,7 @@ public class RegistrationController {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setName(name);
-        user.setSoname(soname);
+        user.setSurname(surname);
         user.findSells();
         userRepo.save(user);
         return "redirect:/user";
