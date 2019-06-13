@@ -7,12 +7,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/registration")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class RegistrationController {
     private final UserRepo userRepo;
@@ -21,12 +23,12 @@ public class RegistrationController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/registration")
+    @GetMapping
     public String registration() {
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping
     public String addUser (@RequestParam("name") String name,
                            @RequestParam("surname") String surname,
                            User user, Map<String ,Object> model) {
