@@ -19,23 +19,12 @@ public class User implements UserDetails {
     private boolean active;
     private String Surname = null;
     private String name = null;
-    private Integer sells = null;
+    private String sells = null;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
-    private static HashMap<String, Integer> list = new HashMap<>();
-
-    public static void setFile(File file) {
-        User.list = ExcelParser.excelParse(file);
-    }
-
-    public static HashMap<String, Integer> getList() {
-        return list;
-    }
-
 
     public String getSurname() {
         return Surname;
@@ -45,11 +34,11 @@ public class User implements UserDetails {
         this.Surname = surname;
     }
 
-    public Integer getSells() {
+    public String  getSells() {
         return sells;
     }
 
-    public void setSells(Integer sells) {
+    public void setSells(String sells) {
         this.sells = sells;
     }
 
@@ -126,14 +115,4 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public void findSells() {
-        if (!User.getList().isEmpty()) {
-            for (Map.Entry<String, Integer> pair : User.getList().entrySet()) {
-                if (pair.getKey().contains(this.getName()) && pair.getKey().contains(this.getSurname())) {
-                    this.setSells(pair.getValue());
-                    break;
-                }
-            }
-        }
-    }
 }

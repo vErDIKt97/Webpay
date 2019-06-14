@@ -12,22 +12,4 @@
     <div>
     ${message?if_exists}
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Sells</th>
-        </tr>
-        </thead>
-        <tbody>
-        <#if list??>
-            <#list list as key, value>
-                <tr>
-                    <td>${key}</td>
-                    <td>${value}</td>
-                </tr>
-            </#list>
-        </#if>
-        </tbody>
-    </table>
 </@c.page>
