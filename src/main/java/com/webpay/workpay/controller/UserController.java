@@ -48,11 +48,23 @@ public class UserController {
         model.addAttribute("roles", Role.values());
         return "userEdit";
     }
-    @GetMapping("del/{user}")
+    @GetMapping("del{user}")
     public String userDelete(@PathVariable User user, Model model) {
-        userRepo.delete(user);
-        model.addAttribute("users",userRepo.findAll());
-        return "userList";
+        if (userRepo.findAll().size()!=1) {
+            try {
+                userRepo.findByUsername(user.getUsername());
+                userRepo.delete(user);
+                model.addAttribute("users", userRepo.findAll());
+                return "userList";
+            } catch (Exception e) {
+                model.addAttribute("users", userRepo.findAll());
+                return "userList";
+            }
+        } else {
+            model.addAttribute("message","You can't del last user");
+            model.addAttribute("users", userRepo.findAll());
+            return "redirect:/user";
+        }
     }
 
     @PostMapping

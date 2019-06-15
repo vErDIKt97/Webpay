@@ -1,5 +1,6 @@
 package com.webpay.workpay.controller;
 
+import com.webpay.workpay.domain.Role;
 import com.webpay.workpay.domain.User;
 import com.webpay.workpay.repository.PayFileRepo;
 import com.webpay.workpay.repository.UserRepo;
@@ -33,6 +34,7 @@ public class MainController {
       payFileRepo.findByFileName(fileSells).findSells(user);
       userRepo.save(user);
       model.addAttribute("user",user);
+      model.addAttribute("admin",Role.ADMIN);
       return "userInfo";
     }
 

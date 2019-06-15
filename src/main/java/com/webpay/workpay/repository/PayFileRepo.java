@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PayFileRepo extends JpaRepository<PayFile,Long> {
     PayFile findByFileName(String fileName);
+
 }

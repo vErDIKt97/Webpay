@@ -1,18 +1,15 @@
 <#import "parts/common.ftl" as c>
-    <#import "parts/login.ftl" as l>
 <@c.page>
-    <@l.loguot/>
     User editor
-
     <form action="/user" method="post">
-        <table>
+        <table class="table">
             <thead>
             <tr>
-                <th>Username</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Password</th>
-                <th>Role</th>
+                <th scope="col">Username</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Password</th>
+                <th scope="col">Role</th>
             </tr>
             </thead>
             <tbody>

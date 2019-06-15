@@ -1,20 +1,18 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
 <@c.page>
- <@l.loguot />
-     <span><a href="/user">User List</a> </span>
+
      <header class="header_wind">
-         <h1>Все что тебе нужно знать!</h1>
+         <h1>Everything you need to know!</h1>
      </header>
     <div>
-        <table>
+        <table class="table">
             <thead>
             <tr>
-                <th>UserName</th>
-                <th>Password</th>
-                <th>Name</th>
-                <th>Sername</th>
-                <th>Sells</th>
+                <th scope="col">UserName</th>
+                <th scope="col">Password</th>
+                <th scope="col">Name</th>
+                <th scope="col">Sername</th>
+                <th scope="col">Sells</th>
             </tr>
             </thead>
             <tbody>
@@ -27,8 +25,5 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div>
-        <p><a href="/userInfo/currentUserEdit">Change name and password</a></p>
     </div>
 </@c.page>

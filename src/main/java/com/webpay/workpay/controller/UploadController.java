@@ -41,15 +41,18 @@ public class UploadController {
 
     @GetMapping("/allSells")
     public String allSells (Model model) {
-        model.addAttribute("list", payFileRepo.findByFileName(payFileDB).getList());
+        model.addAttribute("list", payFileRepo.findByFileName(fileSells).getList());
         return "allSells";
     }
 
     @PostMapping
     public String uploadFile(@RequestParam("file") MultipartFile file,
                               Model model){
-        String name = null;
-        PayFile payFile = new PayFile();
+        String name;
+        PayFile payFile = payFileRepo.findByFileName(fileSells);
+        if (payFile==null) {
+            payFile = new PayFile();
+        }
         if (!file.isEmpty()) {
             try {
                 String rootPath = payFileDB; //try also "C:\path\"
@@ -63,6 +66,7 @@ public class UploadController {
                 file.transferTo(uploadedFile);
                 payFile.setList(uploadedFile);
                 payFile.setFileName(fileSells);
+                payFile.setTimeOfLoad();
                 payFileRepo.save(payFile);
                 model.addAttribute("message","You successfully uploaded file");
                 model.addAttribute("list",payFile.getList() );

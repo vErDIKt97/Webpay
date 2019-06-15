@@ -24,6 +24,11 @@ public class PayFile {
         timeOfLoad = calendar.getTime();
     }
 
+    public void setTimeOfLoad() {
+        Calendar calendar = Calendar.getInstance();
+        this.timeOfLoad = calendar.getTime();
+    }
+
     public Date getTimeOfLoad() {
         return timeOfLoad;
     }
@@ -61,7 +66,7 @@ public class PayFile {
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(new Date(calendar.getTime().getTime() - timeOfLoad.getTime()-18000000));
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH'ч' mm'мин' ss'сек'");
-                    user.setSells(pair.getValue().toString() + " руб." + "Обновлено: " + simpleDateFormat.format(calendar.getTime()) + " назад");
+                    user.setSells(pair.getValue().toString() + " руб.  " + "Обновлено: " + simpleDateFormat.format(calendar.getTime()) + " назад");
                 } else {
                     user.setSells(pair.getValue().toString());
                 }

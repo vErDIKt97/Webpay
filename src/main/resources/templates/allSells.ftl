@@ -1,11 +1,10 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-    <span><a href="/user">User List</a></span>
-    <table>
+    <table class="table">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Sells</th>
+            <th scope="col">Name</th>
+            <th scope="col">Sells</th>
         </tr>
         </thead>
         <tbody>
