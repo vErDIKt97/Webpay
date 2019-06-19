@@ -4,6 +4,10 @@ import com.webpay.workpay.domain.Message;
 import com.webpay.workpay.repository.MessageRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 @Service
 public class MessageService {
     private final MessageRepo messageRepo;
@@ -12,12 +16,22 @@ public class MessageService {
         this.messageRepo = messageRepo;
     }
 
-    public Iterable<Message> allMessages () {
-        return messageRepo.findAll();
+    public ArrayList<Message> allMessages () {
+        return (ArrayList<Message>)messageRepo.findAll();
     }
 
     public void save (Message message) {
         messageRepo.save(message);
+    }
+
+    public HashSet<String> allTags () {
+        List<String> temp = new ArrayList<>();
+        for (Message message:
+             messageRepo.findAll()) {
+            temp.add(message.getTag());
+        }
+        HashSet<String> set = new HashSet<>(temp);
+        return set;
     }
 
     public void delMessage (Message message) {

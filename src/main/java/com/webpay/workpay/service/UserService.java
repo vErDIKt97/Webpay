@@ -25,17 +25,22 @@ public class UserService implements UserDetailsService {
     @Value("${file.sells")
     private String fileSells;
 
-  //  private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepo userRepo, PayFileRepo payFileRepo/*, PasswordEncoder passwordEncoder*/) {
+    public UserService(UserRepo userRepo, PayFileRepo payFileRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.payFileRepo = payFileRepo;
-       // this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findByUsername(username);
+        User user = userRepo.findByUsername(username);
+
+        if (user==null){
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
     public boolean addUser (User user) {
@@ -51,7 +56,7 @@ public class UserService implements UserDetailsService {
             user.setRoles(Collections.singleton(Role.USER));
         if (payFileRepo.findByFileName(fileSells)!=null)
             payFileRepo.findByFileName(fileSells).findSells(user);
-      //  user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
         return true;
     }

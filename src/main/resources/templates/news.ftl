@@ -1,5 +1,22 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
+    <div>
+        Search by tag
+    </div>
+    <div>
+        <form class="form-group mt-3" action="/news" method="post">
+            <label>
+                <input class="form-control" list="tag" name="tag">
+            </label>
+            <datalist id="tag">
+                <#list tags as tag>
+                <option value="${tag}">
+                    </#list>
+            </datalist>
+            <button class="btn btn-primary" type="submit">Filter</button>
+            <input type="hidden" value="${_csrf.token}" name="_csrf" />
+        </form>
+    </div>
     <#if messages??>
         <#list messages as message>
             <div class="container my-3">
@@ -24,7 +41,7 @@
                 </div>
             </div>
         </#list>
-        <#else> No news
+    <#else> No news
     </#if>
 
 </@c.page>

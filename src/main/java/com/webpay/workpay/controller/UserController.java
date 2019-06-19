@@ -4,8 +4,10 @@ import com.webpay.workpay.domain.Role;
 import com.webpay.workpay.domain.User;
 import com.webpay.workpay.repository.PayFileRepo;
 import com.webpay.workpay.repository.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +22,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
+    private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
     private final PayFileRepo payFileRepo;
-    public UserController(UserRepo userRepo, PayFileRepo payFileRepo) {
+    public UserController(UserRepo userRepo, PayFileRepo payFileRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.payFileRepo = payFileRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Value("${file.sells}")
     private String fileSells;
 
+
+
     @GetMapping
     public String userList(Model model) {
+        model.addAttribute("encoder",passwordEncoder);
         model.addAttribute("users", userRepo.findAll());
         for (User user :
                 userRepo.findAll()) {
@@ -55,9 +62,11 @@ public class UserController {
                 userRepo.findByUsername(user.getUsername());
                 userRepo.delete(user);
                 model.addAttribute("users", userRepo.findAll());
+                model.addAttribute("encoder",passwordEncoder);
                 return "userList";
             } catch (Exception e) {
                 model.addAttribute("users", userRepo.findAll());
+                model.addAttribute("encoder",passwordEncoder);
                 return "userList";
             }
         } else {
@@ -79,7 +88,8 @@ public class UserController {
         user.setUsername(username);
         user.setSurname(surname);
         user.setName(name);
-        user.setPassword(password);
+        if (password!=null)
+        user.setPassword(passwordEncoder.encode(password));
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());

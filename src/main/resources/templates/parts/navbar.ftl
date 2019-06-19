@@ -21,7 +21,7 @@
             </#if>
             <#if isAdmin>
                 <li class="nav-item">
-                    <a class="nav-link" href="/news/addNews">Add news</a>
+                    <a class="nav-link" href="/news/addNews">Edit news</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user">User list</a>

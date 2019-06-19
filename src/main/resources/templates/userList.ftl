@@ -1,11 +1,9 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-    <h2>List of users</h2>
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <th scope="col">UserName</th>
-            <th scope="col">Password</th>
             <th scope="col">Name</th>
             <th scope="col">Sername</th>
             <th scope="col">Sells</th>
@@ -18,7 +16,6 @@
     <#list users as user>
         <tr>
             <td>${user.username}</td>
-            <td>${user.password}</td>
             <td>${user.name!}</td>
             <td>${user.surname!}</td>
             <td>${user.sells!}</td>

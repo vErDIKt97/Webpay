@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
 
@@ -13,10 +14,12 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Username can't be empty")
     private String username;
+    @NotBlank(message = "Password can't be empty")
     private String password;
     private boolean active;
-    private String Surname = null;
+    private String surname = null;
     private String name = null;
     private String sells = null;
 
@@ -30,11 +33,11 @@ public class User implements UserDetails {
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        this.Surname = surname;
+        this.surname = surname;
     }
 
     public String  getSells() {

@@ -1,6 +1,5 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-    User editor
     <form action="/user" method="post">
         <table class="table">
             <thead class="thead-dark">
@@ -24,7 +23,7 @@
                         <input type="text" name="surname" value="${user.surname!}">
                     </label></td>
                 <td><label>
-                        <input type="text" name="password" value="${user.password}"
+                        <input type="text" name="password" placeholder="Leave blank if you do not want to change">
                     </label></td>
                 <td>
                     <#list roles as role>
