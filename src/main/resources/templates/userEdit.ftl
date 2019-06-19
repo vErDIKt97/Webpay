@@ -3,7 +3,7 @@
     User editor
     <form action="/user" method="post">
         <table class="table">
-            <thead>
+            <thead class="thead-dark">
             <tr>
                 <th scope="col">Username</th>
                 <th scope="col">Name</th>

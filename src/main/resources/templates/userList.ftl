@@ -2,7 +2,7 @@
 <@c.page>
     <h2>List of users</h2>
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th scope="col">UserName</th>
             <th scope="col">Password</th>

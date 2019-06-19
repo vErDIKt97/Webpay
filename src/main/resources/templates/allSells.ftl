@@ -1,7 +1,7 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Sells</th>

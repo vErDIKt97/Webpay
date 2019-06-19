@@ -12,6 +12,6 @@
         </div>
     </form>
     <div>
-        ${message?if_exists}
+        ${message!}
     </div>
 </@c.page>

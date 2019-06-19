@@ -12,29 +12,35 @@
                 <a class="nav-link" href="/userInfo">Main</a>
             </li>
             <#if user??>
-            <li class="nav-item">
-                <a class="nav-link" href="/userInfo/currentUserEdit">Edit profile</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userInfo/currentUserEdit">Edit profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">News</a>
+                </li>
             </#if>
             <#if isAdmin>
                 <li class="nav-item">
+                    <a class="nav-link" href="/news/addNews">Add news</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/user">User list</a>
                 </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/registration">Add user</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/upload">Upload File sells</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/upload/allSells">All sells</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registration">Add user</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload">Upload File sells</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload/allSells">All sells</a>
+                </li>
             </#if>
         </ul>
 
         <div class="navbar - text mr-3">${name}</div>
         <#if user??>
-        <@l.loguot/>
+            <@l.loguot/>
         </#if>
     </div>
 </nav>

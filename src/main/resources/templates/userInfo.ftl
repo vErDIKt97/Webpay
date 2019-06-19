@@ -6,7 +6,7 @@
      </header>
     <div>
         <table class="table">
-            <thead>
+            <thead class="thead-dark">
             <tr>
                 <th scope="col">UserName</th>
                 <th scope="col">Password</th>
