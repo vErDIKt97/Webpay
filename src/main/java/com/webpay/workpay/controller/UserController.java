@@ -78,23 +78,24 @@ public class UserController {
 
     @PostMapping
     public String userSave(
-            @RequestParam String username,
+            @RequestParam() String username,
             @RequestParam String name,
             @RequestParam String surname,
-            @RequestParam String password,
+            @RequestParam(required = false) String password,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         user.setUsername(username);
         user.setSurname(surname);
         user.setName(name);
-        if (password!=null)
+        if (!password.isEmpty())
         user.setPassword(passwordEncoder.encode(password));
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());
 
         user.getRoles().clear();
+        if (!payFileRepo.findAll().isEmpty())
         payFileRepo.findByFileName(fileSells).findSells(user);
         for (String key :
                 form.keySet()) {

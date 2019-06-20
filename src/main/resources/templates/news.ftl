@@ -13,6 +13,10 @@
                 <option value="${tag}">
                     </#list>
             </datalist>
+            <label>
+                <input class="form-control" type="date" id="date" name="date"
+                       value="${time}">
+            </label>
             <button class="btn btn-primary" type="submit">Filter</button>
             <input type="hidden" value="${_csrf.token}" name="_csrf" />
         </form>
@@ -24,7 +28,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title">#${message.tag}</div>
+                                <div class="card-title">#${message.tag}  Author:${message.author.name} ${message.author.surname}</div>
                                 <div class="card-text">
                                     <div class="my-3" data-id="${message.id}">
                                         <#if message.filename??>
@@ -35,6 +39,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                ${message.date}
                             </div>
                         </div>
                     </div>

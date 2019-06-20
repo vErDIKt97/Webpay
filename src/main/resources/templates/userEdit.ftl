@@ -23,12 +23,12 @@
                         <input type="text" name="surname" value="${user.surname!}">
                     </label></td>
                 <td><label>
-                        <input type="text" name="password" placeholder="Leave blank if you do not want to change">
+                        <input type="text" name="password" placeholder="Blank if you don't change">
                     </label></td>
                 <td>
                     <#list roles as role>
                         <div>
-                            <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")} />${role}</label>
+                            <label><input type="checkbox" class="form-check-input" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")} />${role}</label>
                         </div>
                     </#list>
                 </td>
@@ -37,6 +37,6 @@
         </table>
         <input type="hidden" value="${user.id}" name="userId" />
         <input type="hidden" value="${_csrf.token}" name="_csrf" />
-        <button type="submit">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </@c.page>

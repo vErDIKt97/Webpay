@@ -22,7 +22,7 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User author;
     private String filename;
-
+    private String date;
 
     public Message() {
     }
@@ -70,5 +70,13 @@ public class Message {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

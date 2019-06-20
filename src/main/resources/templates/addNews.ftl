@@ -50,7 +50,7 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title">#${message.tag}</div>
+                                <div class="card-title">#${message.tag}  Author:${message.author.name} ${message.author.surname}</div>
                                 <div class="card-text">
                                     <div class="my-3" data-id="${message.id}">
                                         <#if message.filename??>
@@ -62,6 +62,9 @@
                                     </div>
                                     <a href="del${message.id}" class="btn btn-primary">Delete news</a>
                                 </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                ${message.date}
                             </div>
                         </div>
                     </div>

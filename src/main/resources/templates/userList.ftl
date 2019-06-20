@@ -20,8 +20,8 @@
             <td>${user.surname!}</td>
             <td>${user.sells!}</td>
             <td><#list user.roles as role>${role}<#sep>, </#list></td>
-            <td><a href="/user/${user.id}">edit</a> </td>
-            <td><a href="/user/del${user.id}">delete</a></td>
+            <td><a href="/user/${user.id}" class="btn btn-primary">edit</a> </td>
+            <td><a href="/user/del${user.id}" class="btn btn-primary">delete</a></td>
         </tr>
     </#list>
         </tbody>

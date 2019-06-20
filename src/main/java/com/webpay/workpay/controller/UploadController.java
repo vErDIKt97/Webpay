@@ -41,6 +41,7 @@ public class UploadController {
 
     @GetMapping("/allSells")
     public String allSells (Model model) {
+        if (!payFileRepo.findAll().isEmpty())
         model.addAttribute("list", payFileRepo.findByFileName(fileSells).getList());
         return "allSells";
     }

@@ -5,6 +5,7 @@ import com.webpay.workpay.repository.MessageRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -17,7 +18,9 @@ public class MessageService {
     }
 
     public ArrayList<Message> allMessages () {
-        return (ArrayList<Message>)messageRepo.findAll();
+        ArrayList<Message> all = (ArrayList<Message>) messageRepo.findAll();
+        Collections.reverse(all);
+        return all;
     }
 
     public void save (Message message) {
